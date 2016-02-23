@@ -1,0 +1,27 @@
+" vim:set ts=8 sts=4 sw=4 tw=0 ft=vim: (この行に関しては:help modelineを参照)
+
+"----------
+" カラー設定
+set background=dark
+colorscheme koehler
+
+"----------
+" フォント設定
+set guifont=Migu_2M:h12
+set linespace=2
+
+"----------
+" ウインドウに関する設定
+set columns=120
+set textwidth=78
+set lines=32
+set cmdheight=1
+
+"----------
+" 画面表示に関する設定
+set guioptions=gip
+
+"----------
+" マウスに関する設定
+set nomousefocus
+set mousehide
