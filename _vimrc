@@ -1,4 +1,4 @@
-" vim:set ts=4 sts=4 sw=4 tw=0 ft=vim: (この行に関しては:help modelineを参照)
+" vim:set ts=4 sts=4 sw=4 tw=0 ft=vim:
 
 "初期処理----------
 " mapの初期化
@@ -43,7 +43,7 @@ set fileencodings=ucs-bom,utf-8,iso-2022-jp,cp932,euc-jp,cp20932
 set fileformats=unix,dos,mac
 
 "GUI固有ではない画面表示の設定----------
-colorscheme default
+colorscheme koehler
 " 構文強調表示を有効にする
 syntax enable
 set hlsearch
@@ -130,11 +130,11 @@ set imsearch=-1
 set autoindent
 set smartindent
 " Insertモードでタブ文字を挿入するときの空白の設定
-set expandtab
+set noexpandtab
 set smarttab
 set tabstop=8
-set softtabstop=4
-set shiftwidth=4
+set softtabstop=8
+set shiftwidth=8
 " インデントをshiftwidthの値の整数倍にまとめる設定
 set shiftround
 
@@ -202,7 +202,7 @@ function! s:AutoCompletion()
 endfunction
 
 " スワップファイルの設定
-set noswapfile
+set swapfile
 " バックアップファイルの設定
 set nobackup
 set backupdir=$MISCVIM/tmp/backup
@@ -280,8 +280,6 @@ nnoremap L :<C-u>bnext<CR>
 "マップ定義 - Visualモード----------
 
 "マップ定義 - Insertモード----------
-" <C-l>をTabにする
-inoremap <C-l> <C-v><Tab>
 " ]を入力した際に、対応する括弧が見つからない場合は補完キーとする
 inoremap <silent> <expr> ] searchpair('\[', '', '\]', 'nbW', 'synIDattr(synID(line("."), col("."), 1), "name") =~? "String"') ? ']' : "\<C-n>"
 
