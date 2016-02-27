@@ -43,7 +43,7 @@ set fileencodings=ucs-bom,utf-8,iso-2022-jp,cp932,euc-jp,cp20932
 set fileformats=unix,dos,mac
 
 "GUI固有ではない画面表示の設定----------
-colorscheme koehler
+colorscheme miku
 " 構文強調表示を有効にする
 syntax enable
 set hlsearch
