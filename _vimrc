@@ -4,12 +4,6 @@
 " mapの初期化
 mapclear
 mapclear!
-" augroupの初期化
-augroup vimrc
-    autocmd!
-augroup END
-" autocmdの簡略化
-command! -bang -nargs=* AutoCommand autocmd<bang> vimrc <args>
 
 " WindowsやMacを判断する
 let s:chk_win = has('win32') || has('win64')
@@ -75,45 +69,6 @@ set list
 " タブ文字や行末に表示する文字の指定
 set listchars=tab:>_,trail:~
 
-" スクロール
-" <C-f>、<C-b>でスムーススクロールをする
-let g:scroll_factor = 5000
-let g:scroll_skip_line_size = 3
-noremap <C-f> :call SmoothScroll("f",1, 1)<CR>
-noremap <C-b> :call SmoothScroll("b",1, 1)<CR>
-function! SmoothScroll(dir, windiv, factor)
-    let wh=winheight(0)
-    let i=0
-    let j=0
-    while i < wh / a:windiv
-        let t1=reltime()
-        let i = i + 1
-        if a:dir=="f"
-            if line('w$') == line('$')
-                break
-            endif
-            exec "normal \<C-E>j"
-        else
-            if line('w0') == 1
-                break
-            endif
-            exec "normal \<C-Y>k"
-        endif
-        if j >= g:scroll_skip_line_size
-            let j = 0
-            redraw
-            while 1
-                let t2=reltime(t1,reltime())
-                if t2[1] > g:scroll_factor * a:factor
-                    break
-                endif
-            endwhile
-        else
-            let j = j + 1
-        endif
-    endwhile
-endfunction
-
 " misc
 " マルチバイト文字の幅の扱いの指定
 set ambiwidth=double
@@ -147,7 +102,6 @@ set virtualedit& virtualedit+=block
 " 補完
 " キーワード補完の設定
 set complete=.,w,b,u,k
-AutoCommand FileType * execute printf("setlocal dict=$DOTVIM/dict/%s.dict", &filetype)
 " 補完のプレビューの設定
 set completeopt=menuone
 " コマンドライン補完の設定
@@ -219,23 +173,6 @@ set hidden
 set nrformats& nrformats=hex
 " クリップボードに利用するレジスタの設定
 set clipboard& clipboard+=unnamed,autoselect
-
-" カレントディレクトリをファイルと同じディレクトリに移動
-AutoCommand BufEnter * execute 'silent! lcd ' . escape(expand("%:p:h"), ' ')
-
-" 使い捨て用のファイルの生成
-nnoremap <Space>j :<C-u>JunkFile<CR>
-command! -nargs=0 JunkFile call s:open_junk_file()
-function! s:open_junk_file()
-    let l:junk_dir = $MISCVIM . '/junk'
-    if !isdirectory(l:junk_dir)
-        call mkdir(l:junk_dir, 'p')
-    endif
-    let l:filename = input('Junk Code: ', l:junk_dir.strftime('/%Y-%m-%d'))
-    if l:filename != ''
-        execute 'edit ' . l:filename
-    endif
-endfunction
 
 "検索に関する設定----------
 " インクリメンタルサーチ
