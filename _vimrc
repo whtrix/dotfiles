@@ -1,124 +1,119 @@
 " vim:set ts=4 sts=4 sw=4 tw=0 ft=vim:
 
-"‰Šúˆ—----------
-" map‚Ì‰Šú‰»
+"åˆæœŸå‡¦ç†----------
+" mapã®åˆæœŸåŒ–
 mapclear
 mapclear!
 
-" Windows‚âMac‚ğ”»’f‚·‚é
+" Windowsã‚„Macã‚’åˆ¤æ–­ã™ã‚‹
 let s:chk_win = has('win32') || has('win64')
 let s:chk_mac = !s:chk_win && (has('mac') || has('macunix') || has('gui_macvim') || system('uname') =~? '^darwin')
 
-" Windows/Linux,Mac‚É‚¨‚¢‚ÄA.vim‚Ævimfiles‚Ìˆá‚¢‚ğ‹zû‚·‚é
+" Windows/Linux,Macã«ãŠã„ã¦ã€.vimã¨vimfilesã®é•ã„ã‚’å¸åã™ã‚‹
 if s:chk_win
     let $DOTVIM = $HOME . '/vimfiles'
 else
     let $DOTVIM = $HOME . '/.vim'
 endif
-" Vim‚Å—˜—p‚·‚éOSˆË‘¶ˆêƒtƒ@ƒCƒ‹‚ÌêŠ‚ğw’è
+" Vimã§åˆ©ç”¨ã™ã‚‹OSä¾å­˜ä¸€æ™‚ãƒ•ã‚¡ã‚¤ãƒ«ã®å ´æ‰€ã‚’æŒ‡å®š
 let $MISCVIM = $HOME . '/misc'
 
-"‰Šúİ’è----------
-" <Space>.‚Å‘¦À‚Évimrc‚ğŠJ‚¯‚é‚æ‚¤‚É‚·‚é
+"åˆæœŸè¨­å®š----------
+" <Space>.ã§å³åº§ã«vimrcã‚’é–‹ã‘ã‚‹ã‚ˆã†ã«ã™ã‚‹
 nnoremap <Space>. :<C-u>edit $MYVIMRC<CR>
 
-" Šeíƒvƒ‰ƒOƒCƒ“‚Ìƒ[ƒh
-filetype plugin indent off
-runtime bundle/vim-pathogen/autoload/pathogen.vim
-call pathogen#infect()
-" ƒtƒ@ƒCƒ‹ƒ^ƒCƒv‚ÌŒŸoAƒtƒ@ƒCƒ‹ƒ^ƒCƒvƒvƒ‰ƒOƒCƒ“‚ğg‚¤AƒCƒ“ƒfƒ“ƒgƒtƒ@ƒCƒ‹‚ğg‚¤
+" ãƒ•ã‚¡ã‚¤ãƒ«ã‚¿ã‚¤ãƒ—ã®æ¤œå‡ºã€ãƒ•ã‚¡ã‚¤ãƒ«ã‚¿ã‚¤ãƒ—ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã‚’ä½¿ã†ã€ã‚¤ãƒ³ãƒ‡ãƒ³ãƒˆãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä½¿ã†
 filetype plugin indent on
-" ƒwƒ‹ƒvƒhƒLƒ…ƒƒ“ƒg‚É—˜—p‚·‚éŒ¾Œê
+" æ§‹æ–‡å¼·èª¿è¡¨ç¤ºã‚’æœ‰åŠ¹ã«ã™ã‚‹
+syntax enable
+set hlsearch
+" ãƒ˜ãƒ«ãƒ—ãƒ‰ã‚­ãƒ¥ãƒ¡ãƒ³ãƒˆã«åˆ©ç”¨ã™ã‚‹è¨€èª
 set helplang=ja,en
 set notagbsearch
 
-"“ú–{Œê—pƒGƒ“ƒR[ƒhİ’è----------
+"æ—¥æœ¬èªç”¨ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰è¨­å®š----------
 set fileencodings=ucs-bom,utf-8,iso-2022-jp,cp932,euc-jp,cp20932
 set fileformats=unix,dos,mac
 
-"GUIŒÅ—L‚Å‚Í‚È‚¢‰æ–Ê•\¦‚Ìİ’è----------
+"GUIå›ºæœ‰ã§ã¯ãªã„ç”»é¢è¡¨ç¤ºã®è¨­å®š----------
 colorscheme miku
-" \•¶‹­’²•\¦‚ğ—LŒø‚É‚·‚é
-syntax enable
-set hlsearch
 
-" ƒEƒBƒ“ƒhƒE‚Ìƒ^ƒCƒgƒ‹‚Ì•\¦
+" ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ã‚¿ã‚¤ãƒˆãƒ«ã®è¡¨ç¤º
 set title
-" ƒXƒe[ƒ^ƒXƒ‰ƒCƒ“‚Ì•\¦
-let g:ff_table = {'dos' : 'CR+LF', 'unix' : 'LF', 'mac' : 'CR' }
-set statusline=%<%{expand('%:p')}\ %m%r%h%w%=[%{(&fenc!=''?&fenc:&enc)}:%{g:ff_table[&ff]}][%{&ft}](%l/%L)[%{tabpagenr()}/%{tabpagenr('$')}]
-" ƒ^ƒuƒy[ƒW‚Ìƒ‰ƒxƒ‹‚Ì•\¦
+" ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ãƒ©ã‚¤ãƒ³ã®è¡¨ç¤º
+set statusline=%<%{expand('%:p')}\ %m%r%h%w%=[%{(&fenc!=''?&fenc:&enc)}:%{&ff}][%{&ft}](%l/%L)[%{tabpagenr()}/%{tabpagenr('$')}]
+" ã‚¿ãƒ–ãƒšãƒ¼ã‚¸ã®ãƒ©ãƒ™ãƒ«ã®è¡¨ç¤º
 set showtabline=0
-" ƒXƒe[ƒ^ƒXs‚Ì•\¦
+" ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹è¡Œã®è¡¨ç¤º
 set laststatus=2
-" ƒXƒe[ƒ^ƒXs‚Ì‚‚³
+" ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹è¡Œã®é«˜ã•
 set cmdheight=1
-" ƒRƒ}ƒ“ƒh‚Ì‰æ–ÊÅ‰ºs‚Ö‚Ì•\¦
+" ã‚³ãƒãƒ³ãƒ‰ã®ç”»é¢æœ€ä¸‹è¡Œã¸ã®è¡¨ç¤º
 set showcmd
-" ƒRƒ}ƒ“ƒhƒ‰ƒCƒ“‚ÉƒƒbƒZ[ƒW‚ª•\¦‚³‚ê‚éè‡’l
+" ã‚³ãƒãƒ³ãƒ‰ãƒ©ã‚¤ãƒ³ã«ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãŒè¡¨ç¤ºã•ã‚Œã‚‹é–¾å€¤
 set report=0
 
 " GUI
-" ƒr[ƒv‰¹‚ÉƒrƒWƒ…ƒAƒ‹ƒxƒ‹‚Ìg—p
+" ãƒ“ãƒ¼ãƒ—éŸ³ã«ãƒ“ã‚¸ãƒ¥ã‚¢ãƒ«ãƒ™ãƒ«ã®ä½¿ç”¨
 set visualbell
-" ƒoƒbƒNƒXƒy[ƒX‚Ìİ’è
+" ãƒãƒƒã‚¯ã‚¹ãƒšãƒ¼ã‚¹ã®è¨­å®š
 set backspace=2
-" ”ñ•\¦•¶š
-" ƒ^ƒu•¶š‚âs––‚Ì•\¦
+" éè¡¨ç¤ºæ–‡å­—
+" ã‚¿ãƒ–æ–‡å­—ã‚„è¡Œæœ«ã®è¡¨ç¤º
 set list
-" ƒ^ƒu•¶š‚âs––‚É•\¦‚·‚é•¶š‚Ìw’è
+" ã‚¿ãƒ–æ–‡å­—ã‚„è¡Œæœ«ã«è¡¨ç¤ºã™ã‚‹æ–‡å­—ã®æŒ‡å®š
 set listchars=tab:>_,trail:~
 
 " misc
-" ƒ}ƒ‹ƒ`ƒoƒCƒg•¶š‚Ì•‚Ìˆµ‚¢‚Ìw’è
+" ãƒãƒ«ãƒãƒã‚¤ãƒˆæ–‡å­—ã®å¹…ã®æ‰±ã„ã®æŒ‡å®š
 set ambiwidth=double
-" s˜AŒ‹ƒRƒ}ƒ“ƒh‚É‚¨‚¢‚Ä‚Ì‹ó”’‘}“ü‚Ìİ’è
+" è¡Œé€£çµã‚³ãƒãƒ³ãƒ‰ã«ãŠã„ã¦ã®ç©ºç™½æŒ¿å…¥ã®è¨­å®š
 set nojoinspaces
 
-" ‘}“üƒ‚[ƒh‚Å‚ÌIME‚Ìó‘Ô‚Ìİ’è
+" æŒ¿å…¥ãƒ¢ãƒ¼ãƒ‰ã§ã®IMEã®çŠ¶æ…‹ã®è¨­å®š
 set iminsert=0
 set imsearch=-1
 
-"•ÒW‚ÉŠÖ‚·‚éİ’è----------
-" ƒCƒ“ƒfƒ“ƒg
-" V‚µ‚¢s‚ğŠJn‚µ‚½‚Æ‚«‚ÉV‚µ‚¢s‚ÌƒCƒ“ƒfƒ“ƒg‚Ìİ’è
+"ç·¨é›†ã«é–¢ã™ã‚‹è¨­å®š----------
+" ã‚¤ãƒ³ãƒ‡ãƒ³ãƒˆ
+" æ–°ã—ã„è¡Œã‚’é–‹å§‹ã—ãŸã¨ãã«æ–°ã—ã„è¡Œã®ã‚¤ãƒ³ãƒ‡ãƒ³ãƒˆã®è¨­å®š
 set autoindent
 set smartindent
-" Insertƒ‚[ƒh‚Åƒ^ƒu•¶š‚ğ‘}“ü‚·‚é‚Æ‚«‚Ì‹ó”’‚Ìİ’è
+" Insertãƒ¢ãƒ¼ãƒ‰ã§ã‚¿ãƒ–æ–‡å­—ã‚’æŒ¿å…¥ã™ã‚‹ã¨ãã®ç©ºç™½ã®è¨­å®š
 set noexpandtab
 set smarttab
 set tabstop=8
 set softtabstop=8
 set shiftwidth=8
-" ƒCƒ“ƒfƒ“ƒg‚ğshiftwidth‚Ì’l‚Ì®””{‚É‚Ü‚Æ‚ß‚éİ’è
+" ã‚¤ãƒ³ãƒ‡ãƒ³ãƒˆã‚’shiftwidthã®å€¤ã®æ•´æ•°å€ã«ã¾ã¨ã‚ã‚‹è¨­å®š
 set shiftround
 
-" ƒeƒLƒXƒg‚Ì©“®‰üs‚Ìİ’è
+" ãƒ†ã‚­ã‚¹ãƒˆã®è‡ªå‹•æ”¹è¡Œã®è¨­å®š
 set textwidth=0
 
-" ‹éŒ`‘I‘ğ‚Å©—R‚É”ÍˆÍ‚ğˆÚ“®‚·‚é
+" çŸ©å½¢é¸æŠã§è‡ªç”±ã«ç¯„å›²ã‚’ç§»å‹•ã™ã‚‹
 set virtualedit& virtualedit+=block
 
-" •âŠ®
-" ƒL[ƒ[ƒh•âŠ®‚Ìİ’è
+" è£œå®Œ
+" ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰è£œå®Œã®è¨­å®š
 set complete=.,w,b,u,k
-" •âŠ®‚ÌƒvƒŒƒrƒ…[‚Ìİ’è
+" è£œå®Œã®ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼ã®è¨­å®š
 set completeopt=menuone
-" ƒRƒ}ƒ“ƒhƒ‰ƒCƒ“•âŠ®‚Ìİ’è
+" ã‚³ãƒãƒ³ãƒ‰ãƒ©ã‚¤ãƒ³è£œå®Œã®è¨­å®š
 set wildmenu
 set wildmode=full
 set wildchar=<Tab>
-" Insertƒ‚[ƒh•âŠ®‚Ìƒ|ƒbƒvƒAƒbƒv‚É•\¦‚³‚ê‚é€–Ú”‚ÌÅ‘å’l
+" Insertãƒ¢ãƒ¼ãƒ‰è£œå®Œã®ãƒãƒƒãƒ—ã‚¢ãƒƒãƒ—ã«è¡¨ç¤ºã•ã‚Œã‚‹é …ç›®æ•°ã®æœ€å¤§å€¤
 set pumheight=8
 
-" ©“®•âŠ®‚Ìİ’è
+" è‡ªå‹•è£œå®Œã®è¨­å®š
 if !exists('MyAutoComplete_StartLength')
     let MyAutoComplete_StartLength = 3
 endif
 if !exists('MyAutoComplete_cmd')
     let MyAutoComplete_cmd = "\<C-n>\<C-p>"
 endif
-" •âŠ®‚ª”­“®‚·‚éƒL[
+" è£œå®ŒãŒç™ºå‹•ã™ã‚‹ã‚­ãƒ¼
 function! s:AutoCompletionRegKeys(s, e)
     let letter = a:s
     while letter <=# a:e
@@ -130,7 +125,7 @@ call s:AutoCompletionRegKeys('0', '9')
 call s:AutoCompletionRegKeys('a', 'z')
 call s:AutoCompletionRegKeys('A', 'Z')
 execute 'inoremap <silent> <expr> _ "_" . <SID>AutoCompletion()'
-" ©“®•âŠ®
+" è‡ªå‹•è£œå®Œ
 let s:accnt  = 0
 let s:accol  = col('.')
 let s:acline = line('.')
@@ -155,35 +150,7 @@ function! s:AutoCompletion()
     return ''
 endfunction
 
-" ƒXƒƒbƒvƒtƒ@ƒCƒ‹‚Ìİ’è
-set swapfile
-" ƒoƒbƒNƒAƒbƒvƒtƒ@ƒCƒ‹‚Ìİ’è
-set nobackup
-set backupdir=$MISCVIM/tmp/backup
-" Šª‚«–ß‚µ‚Ìİ’è
-set undofile
-set undodir=$MISCVIM/tmp/undo
-" vimfinfo
-set viminfo='16,<50,s10,h,rA:,rB:,n$MISCVIM/tmp/_viminfo
-
-" misc
-" ƒoƒbƒtƒ@‚ğ•úŠü‚µ‚½‚Æ‚«‚Ìƒtƒ@ƒCƒ‹‚ÌŠJ•ú‚Ìİ’è
-set hidden
-" ”‚Ì‘Œ¸‚ÉŠÖ‚·‚éİ’è
-set nrformats& nrformats=hex
-" ƒNƒŠƒbƒvƒ{[ƒh‚É—˜—p‚·‚éƒŒƒWƒXƒ^‚Ìİ’è
-set clipboard& clipboard+=unnamed,autoselect
-
-"ŒŸõ‚ÉŠÖ‚·‚éİ’è----------
-" ƒCƒ“ƒNƒŠƒƒ“ƒ^ƒ‹ƒT[ƒ`
-set incsearch
-" ‘å•¶š‚ğŠÜ‚ñ‚Å‚¢‚½ê‡‚Ìİ’è
-set ignorecase
-set smartcase
-" <Space>‚Ì2‰ñ‰Ÿ‚µ‚ÅƒnƒCƒ‰ƒCƒgÁ‹
-nnoremap <silent> <Space><Space> :<C-u>nohlsearch<CR><ESC>
-
-"Sticky Shift----------
+"Sticky Shift
 inoremap <expr> ; <SID>sticky_func()
 cnoremap <expr> ; <SID>sticky_func()
 snoremap <expr> ; <SID>sticky_func()
@@ -199,38 +166,59 @@ function! s:sticky_func()
     endif
 endfunction
 
-"ƒ}ƒbƒv’è‹` - Normalƒ‚[ƒh----------
-" ƒEƒBƒ“ƒhƒE•ªŠ„‚Ì•ûŒü
+" ã‚¹ãƒ¯ãƒƒãƒ—ãƒ•ã‚¡ã‚¤ãƒ«ã®è¨­å®š
+set swapfile
+" ãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—ãƒ•ã‚¡ã‚¤ãƒ«ã®è¨­å®š
+set nobackup
+set backupdir=$MISCVIM/tmp/backup
+" å·»ãæˆ»ã—ã®è¨­å®š
+set undofile
+set undodir=$MISCVIM/tmp/undo
+" vimfinfo
+set viminfo='16,<50,s10,h,rA:,rB:,n$MISCVIM/tmp/_viminfo
+
+" misc
+" ãƒãƒƒãƒ•ã‚¡ã‚’æ”¾æ£„ã—ãŸã¨ãã®ãƒ•ã‚¡ã‚¤ãƒ«ã®é–‹æ”¾ã®è¨­å®š
+set hidden
+" æ•°ã®å¢—æ¸›ã«é–¢ã™ã‚‹è¨­å®š
+set nrformats& nrformats=hex
+" ã‚¯ãƒªãƒƒãƒ—ãƒœãƒ¼ãƒ‰ã«åˆ©ç”¨ã™ã‚‹ãƒ¬ã‚¸ã‚¹ã‚¿ã®è¨­å®š
+set clipboard& clipboard+=unnamed,autoselect
+
+"æ¤œç´¢ã«é–¢ã™ã‚‹è¨­å®š----------
+" ã‚¤ãƒ³ã‚¯ãƒªãƒ¡ãƒ³ã‚¿ãƒ«ã‚µãƒ¼ãƒ
+set incsearch
+" å¤§æ–‡å­—ã‚’å«ã‚“ã§ã„ãŸå ´åˆã®è¨­å®š
+set ignorecase
+set smartcase
+" <Space>ã®2å›æŠ¼ã—ã§ãƒã‚¤ãƒ©ã‚¤ãƒˆæ¶ˆå»
+nnoremap <silent> <Space><Space> :<C-u>nohlsearch<CR><ESC>
+
+"ãƒãƒƒãƒ—å®šç¾© - Normalãƒ¢ãƒ¼ãƒ‰----------
+" ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦åˆ†å‰²ã®æ–¹å‘
 set splitbelow
 set splitright
-" ƒfƒtƒHƒ‹ƒg‚ÌÅ¬ƒEƒBƒ“ƒhƒE‚Ì‚‚³
+" ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®æœ€å°ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®é«˜ã•
 set winminheight=0
-" <C-w><Space>‚Ü‚½‚Í<Tab>‚ÅŸ‚ÌƒEƒBƒ“ƒhƒE‚ÉˆÚ“®‚·‚é
+" <C-w><Space>ã¾ãŸã¯<Tab>ã§æ¬¡ã®ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã«ç§»å‹•ã™ã‚‹
 nnoremap <C-w><Space> <C-w>w
 nnoremap <Tab> <C-w>w
 
-" H‚Å‘O‚Ìƒoƒbƒtƒ@‚ğ•\¦
+" Hã§å‰ã®ãƒãƒƒãƒ•ã‚¡ã‚’è¡¨ç¤º
 nnoremap H :<C-u>bprevious<CR>
-" L‚ÅŸ‚Ìƒoƒbƒtƒ@‚ğ•\¦
+" Lã§æ¬¡ã®ãƒãƒƒãƒ•ã‚¡ã‚’è¡¨ç¤º
 nnoremap L :<C-u>bnext<CR>
 
-"ƒ}ƒbƒv’è‹` - Visualƒ‚[ƒh----------
+"ãƒãƒƒãƒ—å®šç¾© - Visualãƒ¢ãƒ¼ãƒ‰----------
 
-"ƒ}ƒbƒv’è‹` - Insertƒ‚[ƒh----------
-" ]‚ğ“ü—Í‚µ‚½Û‚ÉA‘Î‰‚·‚éŠ‡ŒÊ‚ªŒ©‚Â‚©‚ç‚È‚¢ê‡‚Í•âŠ®ƒL[‚Æ‚·‚é
+"ãƒãƒƒãƒ—å®šç¾© - Insertãƒ¢ãƒ¼ãƒ‰----------
+" ]ã‚’å…¥åŠ›ã—ãŸéš›ã«ã€å¯¾å¿œã™ã‚‹æ‹¬å¼§ãŒè¦‹ã¤ã‹ã‚‰ãªã„å ´åˆã¯è£œå®Œã‚­ãƒ¼ã¨ã™ã‚‹
 inoremap <silent> <expr> ] searchpair('\[', '', '\]', 'nbW', 'synIDattr(synID(line("."), col("."), 1), "name") =~? "String"') ? ']' : "\<C-n>"
 
-"ƒ}ƒbƒv’è‹` - Command-lineƒ‚[ƒh----------
+"ãƒãƒƒãƒ—å®šç¾© - Command-lineãƒ¢ãƒ¼ãƒ‰----------
 
-"Plug-in—pİ’è----------
-" vim-quickrun—pİ’è
-let g:quickrun_config = {'*' :{'hook/shebang/enable' : '0'}}
-" Windows—pİ’è
-if executable('Perl') && s:chk_win
-    let g:quickrun_config.perl = {'hook/output_encode/encoding' : 'cp932'}
-endif
-
-" ctrlp—pİ’è
+"Plug-inç”¨è¨­å®š----------
+" ctrlpç”¨è¨­å®š
 let g:ctrlp_cache_dir       = $MISCVIM . '/tmp/ctrlp/'
 let g:ctrlp_use_caching     = 1
 let g:ctrlp_max_files       = 1024
