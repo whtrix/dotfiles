@@ -41,7 +41,8 @@ colorscheme miku
 " ウィンドウのタイトルの表示
 set title
 " ステータスラインの表示
-set statusline=%<%{expand('%:p')}\ %m%r%h%w%=[%{(&fenc!=''?&fenc:&enc)}:%{&ff}][%{&ft}](%l/%L)[%{tabpagenr()}/%{tabpagenr('$')}]
+let g:ff_table = {'dos' : 'CR+LF', 'unix' : 'LF', 'mac' : 'CR' }
+set statusline=%<%{expand('%:p')}\ %m%r%h%w%=[%{(&fenc!=''?&fenc:&enc)}:%{g:ff_table[&ff]}][%{&ft}](%l/%L)[%{tabpagenr()}/%{tabpagenr('$')}]
 " タブページのラベルの表示
 set showtabline=0
 " ステータス行の表示
