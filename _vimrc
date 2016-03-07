@@ -63,7 +63,7 @@ set backspace=2
 " タブ文字や行末の表示
 set list
 " タブ文字や行末に表示する文字の指定
-set listchars=tab:>_,trail:~
+set listchars=tab:>_,trail:~,eol:$
 
 " misc
 " マルチバイト文字の幅の扱いの指定
