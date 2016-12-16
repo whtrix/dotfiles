@@ -36,7 +36,7 @@ set fileencodings=ucs-bom,utf-8,iso-2022-jp,cp932,euc-jp,cp20932
 set fileformats=unix,dos,mac
 
 "GUI固有ではない画面表示の設定----------
-colorscheme miku
+colorscheme industry
 
 " ウィンドウのタイトルの表示
 set title
@@ -53,6 +53,8 @@ set cmdheight=1
 set showcmd
 " コマンドラインにメッセージが表示される閾値
 set report=0
+" 開いているファイルのディレクトリに移動する
+set autochdir
 
 " GUI
 " ビープ音にビジュアルベルの使用
@@ -76,30 +78,12 @@ set iminsert=0
 set imsearch=-1
 
 "編集に関する設定----------
-" インデント
-" 新しい行を開始したときに新しい行のインデントの設定
-set autoindent
-set smartindent
-" Insertモードでタブ文字を挿入するときの空白の設定
-set noexpandtab
-set smarttab
-set tabstop=8
-set softtabstop=8
-set shiftwidth=8
-" インデントをshiftwidthの値の整数倍にまとめる設定
-set shiftround
-
-" テキストの自動改行の設定
-set textwidth=0
-
 " 矩形選択で自由に範囲を移動する
 set virtualedit& virtualedit+=block
 
 " 補完
-" キーワード補完の設定
-set complete=.,w,b,u,k
 " 補完のプレビューの設定
-set completeopt=menuone
+set completeopt=menuone,preview
 " コマンドライン補完の設定
 set wildmenu
 set wildmode=full
@@ -210,20 +194,11 @@ nnoremap H :<C-u>bprevious<CR>
 " Lで次のバッファを表示
 nnoremap L :<C-u>bnext<CR>
 
-"マップ定義 - Visualモード----------
-
-"マップ定義 - Insertモード----------
 " ]を入力した際に、対応する括弧が見つからない場合は補完キーとする
 inoremap <silent> <expr> ] searchpair('\[', '', '\]', 'nbW', 'synIDattr(synID(line("."), col("."), 1), "name") =~? "String"') ? ']' : "\<C-n>"
 
-"マップ定義 - Command-lineモード----------
-
 "Plug-in用設定----------
-" ctrlp用設定
-let g:ctrlp_cache_dir       = $MISCVIM . '/tmp/ctrlp/'
-let g:ctrlp_use_caching     = 1
-let g:ctrlp_max_files       = 1024
-let g:ctrlp_max_depth       = 5
-
+" netrw用設定
+let g:netrw_home            = $MISCVIM . '/tmp/netrw/'
 
 set secure

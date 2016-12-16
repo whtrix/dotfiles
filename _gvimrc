@@ -1,13 +1,13 @@
-" vim:set ts=8 sts=4 sw=4 tw=0 ft=vim:
+" vim:set ts=8 sts=4 sw=4 tw=0 ft=vim: (この行に関しては:help modelineを参照)
 
 "----------
 " カラー設定
 set background=dark
-colorscheme miku
+colorscheme industry
 
 "----------
 " フォント設定
-set guifont=MeiryoKe_Gothic:h12
+set guifont=MeiryoKe_Gothic:h12:cSHIFTJIS
 set linespace=2
 
 "----------
@@ -25,3 +25,4 @@ set guioptions=gip
 " マウスに関する設定
 set nomousefocus
 set mousehide
+
