@@ -1,28 +1,29 @@
-" vim:set ts=8 sts=4 sw=4 tw=0 ft=vim: (‚±‚Ìs‚ÉŠÖ‚µ‚Ä‚Í:help modeline‚ğQÆ)
+" vim:set ts=8 sts=4 sw=4 tw=0 ft=vim: (ã“ã®è¡Œã«é–¢ã—ã¦ã¯:help modelineã‚’å‚ç…§)
 
 "----------
-" ƒJƒ‰[İ’è
+" ã‚«ãƒ©ãƒ¼è¨­å®š
 set background=dark
 colorscheme industry
+syntax enable
 
 "----------
-" ƒtƒHƒ“ƒgİ’è
+" ãƒ•ã‚©ãƒ³ãƒˆè¨­å®š
 set guifont=MeiryoKe_Gothic:h12:cSHIFTJIS
 set linespace=2
 
 "----------
-" ƒEƒCƒ“ƒhƒE‚ÉŠÖ‚·‚éİ’è
+" ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã«é–¢ã™ã‚‹è¨­å®š
 set columns=120
 set textwidth=78
 set lines=32
 set cmdheight=1
 
 "----------
-" ‰æ–Ê•\¦‚ÉŠÖ‚·‚éİ’è
+" ç”»é¢è¡¨ç¤ºã«é–¢ã™ã‚‹è¨­å®š
 set guioptions=gip
 
 "----------
-" ƒ}ƒEƒX‚ÉŠÖ‚·‚éİ’è
+" ãƒã‚¦ã‚¹ã«é–¢ã™ã‚‹è¨­å®š
 set nomousefocus
 set mousehide
 
