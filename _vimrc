@@ -19,13 +19,16 @@ endif
 let $MISCVIM = $HOME . '/misc'
 
 "初期設定----------
-" <Space>.で即座にvimrcを開けるようにする
-nnoremap <Space>. :<C-u>edit $MYVIMRC<CR>
+" <Space>をLeaderに設定する
+let mapleader = "\<Space>"
+" <Leader>.で即座にvimrcを開けるようにする
+nnoremap <Leader>. :<C-u>edit $MYVIMRC<CR>
 
-" ファイルタイプの検出、ファイルタイププラグインを使う、インデントファイルを使う
+" ファイルタイプ、ファイルタイププラグイン、インデントファイルの設定
 filetype plugin indent on
-" 構文強調表示を有効にする
+" 構文強調表示に関する設定 (syntax enable / off)
 syntax enable
+" 検索文字列強調表示に関する設定 (set hlsearch / nohlsearch)
 set hlsearch
 " ヘルプドキュメントに利用する言語
 set helplang=ja,en
@@ -36,44 +39,45 @@ set fileencodings=ucs-bom,utf-8,iso-2022-jp,cp932,euc-jp,cp20932
 set fileformats=unix,dos,mac
 
 "GUI固有ではない画面表示の設定----------
-colorscheme industry
+set background=dark
+colorscheme default
 
-" ウィンドウのタイトルの表示
+" ウィンドウのタイトルの表示 (set title / notitle)
 set title
 " ステータスラインの表示
 let g:ff_table = {'dos' : 'CR+LF', 'unix' : 'LF', 'mac' : 'CR' }
 set statusline=%<%{expand('%:p')}\ %m%r%h%w%=[%{(&fenc!=''?&fenc:&enc)}:%{g:ff_table[&ff]}][%{&ft}](%l/%L)[%{tabpagenr()}/%{tabpagenr('$')}]
-" タブページのラベルの表示
+" タブページのラベルの表示 (set showtabline=[012])
 set showtabline=0
-" ステータス行の表示
+" ステータス行の表示(set laststatus=[012])
 set laststatus=2
 " ステータス行の高さ
 set cmdheight=1
-" コマンドの画面最下行への表示
+" コマンドの画面最下行への表示(set showcmd noshowcmd)
 set showcmd
 " コマンドラインにメッセージが表示される閾値
 set report=0
-" 開いているファイルのディレクトリに移動する
+" 開いているファイルのディレクトリに移動する(set autochdir / noautochdir)
 set autochdir
 
 " GUI
-" ビープ音にビジュアルベルの使用
+" ビープ音にビジュアルベルの使用(set visualbell / novisualbell)
 set visualbell
-" バックスペースの設定
-set backspace=2
+" バックスペースの設定(set backspace=indent,eol,start)
+set backspace=indent,eol,start
 " 非表示文字
-" タブ文字や行末の表示
+" タブ文字や行末の表示(set list / nolist)
 set list
 " タブ文字や行末に表示する文字の指定
 set listchars=tab:>_,trail:~,eol:$
 
 " misc
-" マルチバイト文字の幅の扱いの指定
+" マルチバイト文字の幅の扱いの指定(set ambiwidth=single / double)
 set ambiwidth=double
-" 行連結コマンドにおいての空白挿入の設定
+" 行連結コマンドにおいての空白挿入の設定(set joinspaces / nojoinspaces)
 set nojoinspaces
 
-" 挿入モードでのIMEの状態の設定
+" 挿入モードでのIMEの状態の設定(set iminsert=[012])
 set iminsert=0
 set imsearch=-1
 
@@ -151,19 +155,19 @@ function! s:sticky_func()
     endif
 endfunction
 
-" スワップファイルの設定
+" スワップファイルの設定(set swapfile / noswapfile)
 set swapfile
-" バックアップファイルの設定
+" バックアップファイルの設定(set backup / nobackup)
 set nobackup
 set backupdir=$MISCVIM/tmp/backup
-" 巻き戻しの設定
+" 巻き戻しの設定(set undofile / noundofile)
 set undofile
 set undodir=$MISCVIM/tmp/undo
 " vimfinfo
 set viminfo='16,<50,s10,h,rA:,rB:,n$MISCVIM/tmp/_viminfo
 
 " misc
-" バッファを放棄したときのファイルの開放の設定
+" バッファを放棄したときのファイルの開放の設定(set hidden / nohidden)
 set hidden
 " 数の増減に関する設定
 set nrformats& nrformats=hex
@@ -171,7 +175,7 @@ set nrformats& nrformats=hex
 set clipboard& clipboard+=unnamed,autoselect
 
 "検索に関する設定----------
-" インクリメンタルサーチ
+" インクリメンタルサーチ(set incsearch / noincsearch)
 set incsearch
 " 大文字を含んでいた場合の設定
 set ignorecase
@@ -197,8 +201,32 @@ nnoremap L :<C-u>bnext<CR>
 " ]を入力した際に、対応する括弧が見つからない場合は補完キーとする
 inoremap <silent> <expr> ] searchpair('\[', '', '\]', 'nbW', 'synIDattr(synID(line("."), col("."), 1), "name") =~? "String"') ? ']' : "\<C-n>"
 
+"FileType別設定----------
+augroup MyFileType
+    autocmd!
+    autocmd FileType * execute printf("setlocal dict=$DOTVIM/dict/%s.dict", &filetype)
+augroup END
+
 "Plug-in用設定----------
 " netrw用設定
 let g:netrw_home            = $MISCVIM . '/tmp/netrw/'
+
+" vim-quickrun用設定
+if s:chk_win
+    let g:quickrun_config = {'*' :{'hook/shebang/enable' : '0'}}
+    let g:quickrun_config.perl = {'hook/output_encode/encoding' : 'cp932'}
+endif
+
+" ctrlp用設定
+let g:ctrlp_cache_dir           = $MISCVIM . '/tmp/ctrlp/'
+let g:ctrlp_use_caching         = 1
+let g:ctrlp_working_path_mode   = 'c'
+let g:ctrlp_by_filename         = 1
+let g:ctrlp_regexp              = 1
+
+" memolist用設定
+let g:memolist_path        = $MISCVIM . '/tmp/memo/'
+let g:memolist_memo_suffix = 'txt'
+let g:memolist_ex_cmd      = 'CtrlP'
 
 set secure
