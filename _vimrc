@@ -86,6 +86,7 @@ set imsearch=-1
 set virtualedit& virtualedit+=block
 
 " 補完
+set complete=.,w,b,u,t
 " 補完のプレビューの設定
 set completeopt=menuone,preview
 " コマンドライン補完の設定
@@ -164,7 +165,11 @@ set backupdir=$MISCVIM/tmp/backup
 set undofile
 set undodir=$MISCVIM/tmp/undo
 " vimfinfo
-set viminfo='16,<50,s10,h,rA:,rB:,n$MISCVIM/tmp/_viminfo
+if s:chk_win
+    set viminfo='16,<50,s10,h,rA:,rB:,n$MISCVIM/tmp/_viminfo
+else
+    set viminfo='16,<50,s10,h,rA:,rB:,n$MISCVIM/tmp/.viminfo
+endif
 
 " misc
 " バッファを放棄したときのファイルの開放の設定(set hidden / nohidden)
@@ -189,9 +194,14 @@ set splitbelow
 set splitright
 " デフォルトの最小ウィンドウの高さ
 set winminheight=0
-" <C-w><Space>または<Tab>で次のウィンドウに移動する
-nnoremap <C-w><Space> <C-w>w
+" <Tab>または<C-w><Space>で次のウィンドウに移動する
 nnoremap <Tab> <C-w>w
+nnoremap <C-w><Space> <C-w>w
+" Alt+h,j,k,lでウィンドウサイズ変更
+nnoremap <M-h> <C-w><
+nnoremap <M-l> <C-w>>
+nnoremap <M-j> <C-w>-
+nnoremap <M-k> <C-w>+
 
 " Hで前のバッファを表示
 nnoremap H :<C-u>bprevious<CR>
@@ -207,26 +217,8 @@ augroup MyFileType
     autocmd FileType * execute printf("setlocal dict=$DOTVIM/dict/%s.dict", &filetype)
 augroup END
 
-"Plug-in用設定----------
-" netrw用設定
-let g:netrw_home            = $MISCVIM . '/tmp/netrw/'
-
-" vim-quickrun用設定
-if s:chk_win
-    let g:quickrun_config = {'*' :{'hook/shebang/enable' : '0'}}
-    let g:quickrun_config.perl = {'hook/output_encode/encoding' : 'cp932'}
-endif
-
-" ctrlp用設定
-let g:ctrlp_cache_dir           = $MISCVIM . '/tmp/ctrlp/'
-let g:ctrlp_use_caching         = 1
-let g:ctrlp_working_path_mode   = 'c'
-let g:ctrlp_by_filename         = 1
-let g:ctrlp_regexp              = 1
-
-" memolist用設定
-let g:memolist_path        = $MISCVIM . '/tmp/memo/'
-let g:memolist_memo_suffix = 'txt'
-let g:memolist_ex_cmd      = 'CtrlP'
+"Plugin別設定----------
+" Netrw
+let g:netrw_home=$MISCVIM . '/tmp/netrw'
 
 set secure
