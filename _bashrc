@@ -1,0 +1,5 @@
+set -o vi
+PS1='\n[\w]\n\$ '
+
+alias ll='ls -ahlF'
+

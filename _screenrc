@@ -1,0 +1,15 @@
+startup_message off
+autodetach on
+altscreen on
+defscrollback 65535
+encoding utf-8 utf-8
+termcapinfo xterm* ti@:te@
+
+hardstatus on
+hardstatus alwayslastline
+hardstatus string '%-w%{= .g}%n %t%{-}%+w %-17=%Y/%m/%d %02c'
+
+bind a title
+bind s split
+bind q remove
+bind l windowlist
