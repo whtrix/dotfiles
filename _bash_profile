@@ -3,4 +3,4 @@ if [ -f ~/.bashrc ];then
 fi
 
 export HISTSIZE=65535
-export PATH=$PATH:~/go/bin/
+export PATH=$PATH:~/go/bin
