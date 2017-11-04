@@ -38,6 +38,9 @@ set notagbsearch
 set fileencodings=ucs-bom,utf-8,iso-2022-jp,cp932,euc-jp,cp20932
 set fileformats=unix,dos,mac
 
+"スペルチェック設定----------
+"set spelllang=en,cjk
+
 "GUI固有ではない画面表示の設定----------
 set background=dark
 colorscheme default
@@ -197,11 +200,6 @@ set winminheight=0
 " <Tab>または<C-w><Space>で次のウィンドウに移動する
 nnoremap <Tab> <C-w>w
 nnoremap <C-w><Space> <C-w>w
-" Alt+h,j,k,lでウィンドウサイズ変更
-nnoremap <M-h> <C-w><
-nnoremap <M-l> <C-w>>
-nnoremap <M-j> <C-w>-
-nnoremap <M-k> <C-w>+
 
 " Hで前のバッファを表示
 nnoremap H :<C-u>bprevious<CR>
