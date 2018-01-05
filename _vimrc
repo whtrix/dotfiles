@@ -24,10 +24,23 @@ let mapleader = "\<Space>"
 " <Leader>.で即座にvimrcを開けるようにする
 nnoremap <Leader>. :<C-u>edit $MYVIMRC<CR>
 
-" ファイルタイプ、ファイルタイププラグイン、インデントファイルの設定
-filetype plugin indent on
+" エンコーディング設定
+if has('vim_starting')
+    set encoding=utf-8
+    scriptencoding utf-8
+endif
+
+" TrueColorの有効化
+if has('vim_starting') && !has('gui_running') && exists('&termguicolors') && $COLORTERM ==# 'truecolor'
+    let &t_8f = "\e[38;2;%lu;%lu;%lum"
+    let &t_8b = "\e[48;2;%lu;%lu;%lum"
+    set termguicolors
+endif
+
 " 構文強調表示に関する設定 (syntax enable / off)
 syntax enable
+" ファイルタイプ、ファイルタイププラグイン、インデントファイルの設定
+filetype plugin indent on
 " 検索文字列強調表示に関する設定 (set hlsearch / nohlsearch)
 set hlsearch
 " ヘルプドキュメントに利用する言語
@@ -159,6 +172,33 @@ function! s:sticky_func()
     endif
 endfunction
 
+" Quickfix/Locationlistの表示
+nnoremap <silent> <Plug>(my-toggle-quickfix) :<C-u>call <SID>toggle_qf()<CR>
+nmap Q <Plug>(my-toggle-quickfix)
+function! s:toggle_qf() abort
+    let nwin = winnr('$')
+    cclose
+    if nwin == winnr('$')
+        botright copen
+    endif
+endfunction
+
+nnoremap <silent> <Plug>(my-toggle-locationlist) :<C-u>call <SID>toggle_ll()<CR>
+nmap L <Plug>(my-toggle-locationlist)
+function! s:toggle_ll() abort
+    try
+        let nwin = winnr('$')
+        lclose
+        if nwin == winnr('$')
+            botright lopen
+        endif
+    catch /^Vim\%((\a\+)\)\=:E776/
+        echohl WarningMsg
+        redraw | echo 'No location list'
+        echohl None
+    endtry
+endfunction
+
 " スワップファイルの設定(set swapfile / noswapfile)
 set swapfile
 " バックアップファイルの設定(set backup / nobackup)
@@ -180,7 +220,7 @@ set hidden
 " 数の増減に関する設定
 set nrformats& nrformats=hex
 " クリップボードに利用するレジスタの設定
-set clipboard& clipboard+=unnamed,autoselect
+set clipboard& clipboard+=unnamed,unnamedplus,autoselect
 
 "検索に関する設定----------
 " インクリメンタルサーチ(set incsearch / noincsearch)
@@ -200,11 +240,25 @@ set winminheight=0
 " <Tab>または<C-w><Space>で次のウィンドウに移動する
 nnoremap <Tab> <C-w>w
 nnoremap <C-w><Space> <C-w>w
+" <C-w>zで現在のバッファを最大化する
+nnoremap <silent> <Plug>(my-zoom-window) :<C-u>call <SID>toggle_window_zoom()<CR>
+nmap <C-w>z <Plug>(my-zoom-window)
+nmap <C-w><C-z> <Plug>(my-zoom-window)
+function! s:toggle_window_zoom() abort
+    if exists('t:zoom_winrestcmd')
+        execute t:zoom_winrestcmd
+        unlet t:zoom_winrestcmd
+    else
+        let t:zoom_winrestcmd = winrestcmd()
+        resize
+        vertical resize
+    endif
+endfunction
 
 " Hで前のバッファを表示
-nnoremap H :<C-u>bprevious<CR>
+nnoremap <C-h> :<C-u>bprevious<CR>
 " Lで次のバッファを表示
-nnoremap L :<C-u>bnext<CR>
+nnoremap <C-l> :<C-u>bnext<CR>
 
 " ]を入力した際に、対応する括弧が見つからない場合は補完キーとする
 inoremap <silent> <expr> ] searchpair('\[', '', '\]', 'nbW', 'synIDattr(synID(line("."), col("."), 1), "name") =~? "String"') ? ']' : "\<C-n>"
