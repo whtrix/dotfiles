@@ -243,7 +243,6 @@ nnoremap <C-w><Space> <C-w>w
 " <C-w>zで現在のバッファを最大化する
 nnoremap <silent> <Plug>(my-zoom-window) :<C-u>call <SID>toggle_window_zoom()<CR>
 nmap <C-w>z <Plug>(my-zoom-window)
-nmap <C-w><C-z> <Plug>(my-zoom-window)
 function! s:toggle_window_zoom() abort
     if exists('t:zoom_winrestcmd')
         execute t:zoom_winrestcmd

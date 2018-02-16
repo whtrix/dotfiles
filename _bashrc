@@ -1,5 +1,12 @@
 set -o vi
-PS1='\n[\w]\n\$ '
+export PS1='\n[\w]\n\$ '
+export HISTCONTROL=ignoreboth:erasedups
 
 alias ll='ls -ahlF'
+alias rm='trash-put'
 
+PATH="/Users/AHA03481@jp.ibm.com/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/Users/AHA03481@jp.ibm.com/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/Users/AHA03481@jp.ibm.com/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/Users/AHA03481@jp.ibm.com/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/Users/AHA03481@jp.ibm.com/perl5"; export PERL_MM_OPT;
