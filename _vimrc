@@ -63,6 +63,7 @@ set title
 " ステータスラインの表示
 let g:ff_table = {'dos' : 'dos:CR+LF', 'unix' : 'unix:LF', 'mac' : 'mac:CR' }
 set statusline=%<%{expand('%:p')}\ %m%r%h%w%=[%{(&fenc!=''?&fenc:&enc)}\|%{g:ff_table[&ff]}][%{&ft}](%l/%L)[%{tabpagenr()}/%{tabpagenr('$')}]
+highlight StatusLine term=reverse cterm=reverse
 " タブページのラベルの表示 (set showtabline=[012])
 set showtabline=0
 " ステータス行の表示(set laststatus=[012])
