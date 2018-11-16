@@ -21,7 +21,7 @@ module.exports = {
     fontWeightBold: 'bold',
 
     // terminal cursor background color and opacity (hex, rgb, hsl, hsv, hwb or cmyk)
-    cursorColor: 'rgba(248,28,229,0.8)',
+    cursorColor: 'rgba(32,164,32,0.8)',
 
     // terminal text color under BLOCK cursor
     cursorAccentColor: '#000',
@@ -107,7 +107,7 @@ module.exports = {
     env: {},
 
     // set to `false` for no bell
-    bell: 'SOUND',
+    bell: false,
 
     // if `true` (without backticks and without quotes), selected text will automatically be copied to the clipboard
     copyOnSelect: false,
@@ -131,7 +131,12 @@ module.exports = {
   //   `hyperpower`
   //   `@company/project`
   //   `project#1.0.1`
-  plugins: ["hyper-search", "hyper-statusline", "hyper-tab-icons"],
+  plugins: [
+    "hyper-solarized-patched",
+    "hyper-search",
+    "hyper-tab-icons-plus",
+    "hyper-statusline"
+  ],
 
   // in development, you can create a directory under
   // `~/.hyper_plugins/local/` and include it here
