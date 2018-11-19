@@ -37,11 +37,11 @@ if has('vim_starting') && !has('gui_running') && exists('&termguicolors') && $CO
     set termguicolors
 endif
 
-" 構文強調表示に関する設定 (syntax enable / off)
+" 構文強調表示に関する設定
 syntax enable
 " ファイルタイプ、ファイルタイププラグイン、インデントファイルの設定
 filetype plugin indent on
-" 検索文字列強調表示に関する設定 (set hlsearch / nohlsearch)
+" 検索文字列強調表示に関する設定
 set hlsearch
 " ヘルプドキュメントに利用する言語
 set helplang=ja,en
@@ -52,49 +52,48 @@ set fileencodings=ucs-bom,utf-8,iso-2022-jp,cp932,euc-jp,cp20932
 set fileformats=unix,dos,mac
 
 "スペルチェック設定----------
-"set spelllang=en,cjk
+set spelllang=en,cjk
 
 "GUI固有ではない画面表示の設定----------
-set background=dark
 colorscheme default
 
-" ウィンドウのタイトルの表示 (set title / notitle)
+" ウィンドウのタイトルの表示
 set title
 " ステータスラインの表示
 let g:ff_table = {'dos' : 'dos:CR+LF', 'unix' : 'unix:LF', 'mac' : 'mac:CR' }
 set statusline=%<%{expand('%:p')}\ %m%r%h%w%=[%{(&fenc!=''?&fenc:&enc)}\|%{g:ff_table[&ff]}][%{&ft}](%l/%L)[%{tabpagenr()}/%{tabpagenr('$')}]
 highlight StatusLine term=reverse cterm=reverse
-" タブページのラベルの表示 (set showtabline=[012])
+" タブページのラベルの表示
 set showtabline=0
-" ステータス行の表示(set laststatus=[012])
+" ステータス行の表示
 set laststatus=2
 " ステータス行の高さ
 set cmdheight=1
-" コマンドの画面最下行への表示(set showcmd noshowcmd)
+" コマンドの画面最下行への表示
 set showcmd
 " コマンドラインにメッセージが表示される閾値
 set report=0
-" 開いているファイルのディレクトリに移動する(set autochdir / noautochdir)
+" 開いているファイルのディレクトリに移動する
 set autochdir
 
 " GUI
-" ビープ音にビジュアルベルの使用(set visualbell / novisualbell)
+" ビープ音にビジュアルベルの使用
 set visualbell
-" バックスペースの設定(set backspace=indent,eol,start)
+" バックスペースの設定
 set backspace=indent,eol,start
 " 非表示文字
-" タブ文字や行末の表示(set list / nolist)
+" タブ文字や行末の表示
 set list
 " タブ文字や行末に表示する文字の指定
 set listchars=tab:>_,trail:~,eol:$
 
 " misc
-" マルチバイト文字の幅の扱いの指定(set ambiwidth=single / double)
+" マルチバイト文字の幅の扱いの指定
 set ambiwidth=double
-" 行連結コマンドにおいての空白挿入の設定(set joinspaces / nojoinspaces)
+" 行連結コマンドにおいての空白挿入の設定
 set nojoinspaces
 
-" 挿入モードでのIMEの状態の設定(set iminsert=[012])
+" 挿入モードでのIMEの状態の設定
 set iminsert=0
 set imsearch=-1
 
@@ -200,12 +199,12 @@ function! s:toggle_ll() abort
     endtry
 endfunction
 
-" スワップファイルの設定(set swapfile / noswapfile)
+" スワップファイルの設定
 set swapfile
-" バックアップファイルの設定(set backup / nobackup)
-set nobackup
+" バックアップファイルの設定
+set backup
 set backupdir=$MISCVIM/tmp/backup
-" 巻き戻しの設定(set undofile / noundofile)
+" 巻き戻しの設定
 set undofile
 set undodir=$MISCVIM/tmp/undo
 " vimfinfo
@@ -216,7 +215,7 @@ else
 endif
 
 " misc
-" バッファを放棄したときのファイルの開放の設定(set hidden / nohidden)
+" バッファを放棄したときのファイルの開放の設定
 set hidden
 " 数の増減に関する設定
 set nrformats& nrformats=hex
@@ -224,7 +223,7 @@ set nrformats& nrformats=hex
 set clipboard& clipboard+=unnamed,unnamedplus,autoselect
 
 "検索に関する設定----------
-" インクリメンタルサーチ(set incsearch / noincsearch)
+" インクリメンタルサーチ
 set incsearch
 " 大文字を含んでいた場合の設定
 set ignorecase
@@ -255,9 +254,9 @@ function! s:toggle_window_zoom() abort
     endif
 endfunction
 
-" Hで前のバッファを表示
+" <C-h>で前のバッファを表示
 nnoremap <C-h> :<C-u>bprevious<CR>
-" Lで次のバッファを表示
+" <C-l>で次のバッファを表示
 nnoremap <C-l> :<C-u>bnext<CR>
 
 " ]を入力した際に、対応する括弧が見つからない場合は補完キーとする

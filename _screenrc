@@ -5,6 +5,8 @@ defscrollback 65535
 encoding utf-8 utf-8
 termcapinfo xterm* ti@:te@
 
+shell -$SHELL
+
 hardstatus on
 hardstatus alwayslastline
 hardstatus string '%-w%{= .g}%n %t%{-}%+w %-17=%Y/%m/%d %02c'

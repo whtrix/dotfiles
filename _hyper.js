@@ -132,7 +132,7 @@ module.exports = {
   //   `@company/project`
   //   `project#1.0.1`
   plugins: [
-    "hyper-solarized-patched",
+    "hyper-solarized-dark",
     "hyper-search",
     "hyper-tab-icons-plus",
     "hyper-statusline"
