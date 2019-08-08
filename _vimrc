@@ -11,12 +11,12 @@ let s:chk_mac = !s:chk_win && (has('mac') || has('macunix') || has('gui_macvim')
 
 " Windows/Linux,Macにおいて、.vimとvimfilesの違いを吸収する
 if s:chk_win
-    let $DOTVIM = $HOME . '/vimfiles'
+    let $DOTVIM = $HOME .. '/vimfiles'
 else
-    let $DOTVIM = $HOME . '/.vim'
+    let $DOTVIM = $HOME .. '/.vim'
 endif
 " Vimで利用するOS依存一時ファイルの場所を指定
-let $MISCVIM = $HOME . '/misc'
+let $MISCVIM = $HOME .. '/misc'
 
 "初期設定----------
 " <Space>をLeaderに設定する
@@ -47,11 +47,11 @@ set hlsearch
 set helplang=ja,en
 set notagbsearch
 
-"日本語用エンコード設定----------
+" 日本語用エンコード設定
 set fileencodings=ucs-bom,utf-8,iso-2022-jp,cp932,euc-jp,cp20932
 set fileformats=unix,dos,mac
 
-"スペルチェック設定----------
+" スペルチェック設定
 set spelllang=en,cjk
 
 "GUI固有ではない画面表示の設定----------
@@ -75,6 +75,8 @@ set showcmd
 set report=0
 " 開いているファイルのディレクトリに移動する
 set autochdir
+" 検索位置が何番目なのかわかるようにする
+set shortmess-=S
 
 " GUI
 " ビープ音にビジュアルベルの使用
@@ -103,6 +105,7 @@ set virtualedit& virtualedit+=block
 
 " 補完
 set complete=.,w,b,u,t
+set completeslash=slash
 " 補完のプレビューの設定
 set completeopt=menuone,preview
 " コマンドライン補完の設定
@@ -123,14 +126,14 @@ endif
 function! s:AutoCompletionRegKeys(s, e)
     let letter = a:s
     while letter <=# a:e
-        execute 'inoremap <silent> <expr> ' letter ' "' . letter . '" . <SID>AutoCompletion()'
+        execute 'inoremap <silent> <expr> ' letter ' "' .. letter .. '" .. <SID>AutoCompletion()'
         let letter = nr2char(char2nr(letter)+1)
     endwhile
 endfunction
 call s:AutoCompletionRegKeys('0', '9')
 call s:AutoCompletionRegKeys('a', 'z')
 call s:AutoCompletionRegKeys('A', 'Z')
-execute 'inoremap <silent> <expr> _ "_" . <SID>AutoCompletion()'
+execute 'inoremap <silent> <expr> _ "_" .. <SID>AutoCompletion()'
 " 自動補完
 let s:accnt  = 0
 let s:accol  = col('.')
@@ -270,6 +273,6 @@ augroup END
 
 "Plugin別設定----------
 " Netrw
-let g:netrw_home=$MISCVIM . '/tmp/netrw'
+let g:netrw_home=$MISCVIM .. '/tmp/netrw'
 
 set secure

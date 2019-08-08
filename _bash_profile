@@ -4,3 +4,5 @@ fi
 
 export HISTSIZE=65535
 export PATH=$PATH:~/go/bin
+export GOPATH=~/go/bin
+export PATH="/usr/local/opt/ruby/bin:$PATH"
