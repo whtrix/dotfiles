@@ -1,0 +1,15 @@
+setopt interactivecomments
+bindkey -v
+alias ll='ls -alFG'
+export PS1='[%~]
+ # '
+
+# brew
+# fzf
+function fzf-select-history() {
+    BUFFER=$(history -n -r 1 | fzf --query "$LBUFFER" --reverse)
+    CURSOR=$#BUFFER
+    zle reset-prompt
+}
+zle -N fzf-select-history
+bindkey '^r' fzf-select-history
