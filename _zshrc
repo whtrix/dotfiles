@@ -5,13 +5,15 @@ export PS1='[%~]
  # '
 
 # history
+export HISTFILE=$ZDOTDIR/.zsh_history
+export HISTSIZE=100000
+export SAVEHIST=100000
 setopt share_history
 setopt hist_ignore_all_dups
 setopt hist_reduce_blanks
 zshaddhistory() {
     [[ "$?" == 0 ]]
 }
-
 # fzf
 function fzf-select-history() {
     BUFFER=$(history -n -r 1 | fzf --query "$LBUFFER" --reverse)
