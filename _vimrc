@@ -206,15 +206,15 @@ endfunction
 set swapfile
 " バックアップファイルの設定
 set backup
-set backupdir=$MISCVIM/tmp/backup
+set backupdir=$MISCVIM/vim/backup
 " 巻き戻しの設定
 set undofile
-set undodir=$MISCVIM/tmp/undo
+set undodir=$MISCVIM/vim/undo
 " vimfinfo
 if s:chk_win
-    set viminfo='16,<50,s10,h,rA:,rB:,n$MISCVIM/tmp/_viminfo
+    set viminfo='16,<50,s10,h,rA:,rB:,n$MISCVIM/vim/_viminfo
 else
-    set viminfo='16,<50,s10,h,rA:,rB:,n$MISCVIM/tmp/.viminfo
+    set viminfo='16,<50,s10,h,rA:,rB:,n$MISCVIM/vim/.viminfo
 endif
 
 " misc
@@ -273,6 +273,6 @@ augroup END
 
 "Plugin別設定----------
 " Netrw
-let g:netrw_home=$MISCVIM .. '/tmp/netrw'
+let g:netrw_home=$MISCVIM .. '/vim/netrw'
 
 set secure

@@ -4,6 +4,14 @@ alias ll='ls -alFG'
 export PS1='[%~]
  # '
 
+# history
+setopt share_history
+setopt hist_ignore_all_dups
+setopt hist_reduce_blanks
+zshaddhistory() {
+    [[ "$?" == 0 ]]
+}
+
 # fzf
 function fzf-select-history() {
     BUFFER=$(history -n -r 1 | fzf --query "$LBUFFER" --reverse)
