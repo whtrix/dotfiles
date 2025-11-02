@@ -43,7 +43,7 @@ set fileformats=unix,dos,mac
 set spelllang=en,cjk
 
 "GUI固有ではない画面表示の設定----------
-colorscheme default
+colorscheme solarized
 
 " ウィンドウのタイトルの表示
 set title
