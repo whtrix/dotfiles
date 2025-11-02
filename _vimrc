@@ -1,5 +1,3 @@
-" vim:set ts=4 sts=4 sw=4 tw=0 ft=vim:
-
 "初期処理----------
 " mapの初期化
 mapclear
@@ -23,10 +21,6 @@ let $MISCVIM = $HOME .. '/misc'
 let mapleader = "\<Space>"
 " <Leader>.で即座にvimrcを開けるようにする
 nnoremap <Leader>. :<C-u>edit $MYVIMRC<CR>
-
-" エンコーディング設定
-set encoding=utf-8
-scriptencoding utf-8
 
 " TrueColorの有効化
 set termguicolors
@@ -270,3 +264,5 @@ augroup END
 let g:netrw_home=$MISCVIM .. '/vim/netrw'
 
 set secure
+
+" vim:set ts=4 sts=4 sw=4 tw=0 ft=vim:
