@@ -211,7 +211,7 @@ set hidden
 " 数の増減に関する設定
 set nrformats& nrformats=hex
 " クリップボードに利用するレジスタの設定
-set clipboard& clipboard+=unnamed,unnamedplus,autoselect
+set clipboard& clipboard^=unnamedplus
 
 "検索に関する設定----------
 " インクリメンタルサーチ
