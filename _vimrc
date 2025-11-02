@@ -25,17 +25,11 @@ let mapleader = "\<Space>"
 nnoremap <Leader>. :<C-u>edit $MYVIMRC<CR>
 
 " エンコーディング設定
-if has('vim_starting')
-    set encoding=utf-8
-    scriptencoding utf-8
-endif
+set encoding=utf-8
+scriptencoding utf-8
 
 " TrueColorの有効化
-if has('vim_starting') && !has('gui_running') && exists('&termguicolors') && $COLORTERM ==# 'truecolor'
-    let &t_8f = "\e[38;2;%lu;%lu;%lum"
-    let &t_8b = "\e[48;2;%lu;%lu;%lum"
-    set termguicolors
-endif
+set termguicolors
 
 " 構文強調表示に関する設定
 syntax enable
@@ -116,18 +110,18 @@ set wildchar=<Tab>
 set pumheight=8
 
 " 自動補完の設定
-if !exists('MyAutoComplete_StartLength')
-    let MyAutoComplete_StartLength = 3
+if !exists('g:MyAutoComplete_StartLength')
+    let g:MyAutoComplete_StartLength = 3
 endif
-if !exists('MyAutoComplete_cmd')
-    let MyAutoComplete_cmd = "\<C-n>\<C-p>"
+if !exists('g:MyAutoComplete_cmd')
+    let g:MyAutoComplete_cmd = "\<C-n>\<C-p>"
 endif
 " 補完が発動するキー
 function! s:AutoCompletionRegKeys(s, e)
-    let letter = a:s
-    while letter <=# a:e
-        execute 'inoremap <silent> <expr> ' letter ' "' .. letter .. '" .. <SID>AutoCompletion()'
-        let letter = nr2char(char2nr(letter)+1)
+    let l:letter = a:s
+    while l:letter <=# a:e
+        execute 'inoremap <silent> <expr> ' l:letter ' "' .. l:letter .. '" .. <SID>AutoCompletion()'
+        let l:letter = nr2char(char2nr(l:letter)+1)
     endwhile
 endfunction
 call s:AutoCompletionRegKeys('0', '9')
@@ -179,9 +173,9 @@ endfunction
 nnoremap <silent> <Plug>(my-toggle-quickfix) :<C-u>call <SID>toggle_qf()<CR>
 nmap Q <Plug>(my-toggle-quickfix)
 function! s:toggle_qf() abort
-    let nwin = winnr('$')
+    let l:nwin = winnr('$')
     cclose
-    if nwin == winnr('$')
+    if l:nwin == winnr('$')
         botright copen
     endif
 endfunction
@@ -190,9 +184,9 @@ nnoremap <silent> <Plug>(my-toggle-locationlist) :<C-u>call <SID>toggle_ll()<CR>
 nmap L <Plug>(my-toggle-locationlist)
 function! s:toggle_ll() abort
     try
-        let nwin = winnr('$')
+        let l:nwin = winnr('$')
         lclose
-        if nwin == winnr('$')
+        if l:nwin == winnr('$')
             botright lopen
         endif
     catch /^Vim\%((\a\+)\)\=:E776/
