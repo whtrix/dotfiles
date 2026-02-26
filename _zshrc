@@ -12,11 +12,14 @@ zshaddhistory() {
     [[ "$?" == 0 ]]
 }
 
-# fzf
-function fzf-select-history() {
-    BUFFER=$(history -n -r 1 | fzf --query "$LBUFFER" --reverse)
-    CURSOR=$#BUFFER
-    zle reset-prompt
-}
-zle -N fzf-select-history
-bindkey '^r' fzf-select-history
+# XDG defaults (set only if not already defined)
+typeset -gx XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
+typeset -gx XDG_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/.cache}
+typeset -gx XDG_DATA_HOME=${XDG_DATA_HOME:-$HOME/.local/share}
+typeset -gx XDG_STATE_HOME=${XDG_STATE_HOME:-$HOME/.local/state}
+# XDG:less
+typeset -gx LESSHISTFILE=${LESSHISTFILE:-$XDG_STATE_HOME/less/history}
+# XDG:kube
+typeset -gx KUBECONFIG=${KUBECONFIG:-$XDG_CONFIG_HOME/k8s/config}
+typeset -gx KUBECACHEDIR=${KUBECACHEDIR:-$XDG_CACHE_HOME/k8s/cache}
+
